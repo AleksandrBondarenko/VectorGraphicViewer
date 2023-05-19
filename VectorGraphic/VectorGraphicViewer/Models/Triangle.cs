@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VectorGraphicViewer.Models
 {
-    public class Triangle
+    public class Triangle : Primitive
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VectorGraphicViewer.Models
 {
-    public class Circle
+    public class Circle : Primitive
     {
     }
 }

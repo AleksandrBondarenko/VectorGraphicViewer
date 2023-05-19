@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VectorGraphicViewer.ViewModels
 {
-    public class CircleVM
+    public class CircleVM : PrimitiveVM
     {
     }
 }
