@@ -1,0 +1,7 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/VectorGraphic/VectorGraphicViewer/VectorGraphicViewer.csproj.user
+/VectorGraphic/.vs/VectorGraphic
+/VectorGraphic/VectorGraphicViewer/obj
