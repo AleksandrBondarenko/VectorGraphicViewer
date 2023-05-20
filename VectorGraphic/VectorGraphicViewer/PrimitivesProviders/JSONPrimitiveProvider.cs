@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using VectorGraphicViewer.Models;
@@ -15,9 +18,16 @@ namespace VectorGraphicViewer.PrimitivesProviders
             _fileName = FileName;
         }
 
-        List<Primitive> IPrimitivesProvider.Primitives()
+        public List<Primitive>? Primitives()
         {
-            throw new NotImplementedException();
+            List<Primitive>? primitives;
+            using (StreamReader reader = File.OpenText(_fileName))
+            {
+                var jsonString = reader.ReadToEnd();
+                primitives = JsonConvert.DeserializeObject<List<Primitive>>(jsonString);
+            }
+            
+            return primitives;
         }
     }
 }
