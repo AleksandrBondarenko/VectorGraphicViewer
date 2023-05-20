@@ -25,6 +25,7 @@ namespace VectorGraphicViewer
         }
         private void ConfigureServices(ServiceCollection services)
         {
+            services.AddAutoMapper(typeof(AppMappingProfile));
             services.AddSingleton<IPrimitivesProvider>(new JSONPrimitiveProvider("Primitives.json"));
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainVM>();
