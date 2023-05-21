@@ -5,15 +5,69 @@
 
 
     <DataTemplate DataType="{x:Type local:LineVM}">
-
+        <Line
+         X1="{Binding A.X}" Y1="{Binding A.Y}"
+         X2="{Binding B.X}" Y2="{Binding B.Y}"
+         StrokeThickness="1">
+            <Line.Stroke>
+                <SolidColorBrush Color="{Binding Color}"/>
+            </Line.Stroke>
+        </Line>
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type local:CircleVM}">
-
+        <Path StrokeThickness="1">
+            <Path.Stroke>
+                <SolidColorBrush Color="{Binding Color}"/>
+            </Path.Stroke>
+            <Path.Style>
+                <Style TargetType="Path">
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{Binding Color}"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Filled}" Value="False">
+                            <Setter Property="Fill" Value="Transparent" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Path.Style>
+            <Path.Data>
+                <EllipseGeometry RadiusX="{Binding Radius}" RadiusY="{Binding Radius}" Center="{Binding CenterPoint}" />
+            </Path.Data>
+        </Path>
     </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type local:TriangleVM}">
 
+    <DataTemplate DataType="{x:Type local:TriangleVM}">
+        <Path StrokeThickness="1">
+            <Path.Stroke>
+                <SolidColorBrush Color="{Binding Color}"/>
+            </Path.Stroke>
+            <Path.Style>
+                <Style TargetType="Path">
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{Binding Color}"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Filled}" Value="False">
+                            <Setter Property="Fill" Value="Transparent" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Path.Style>
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure IsClosed="True" StartPoint="{Binding A}">
+                        <LineSegment Point="{Binding B}" />
+                        <LineSegment Point="{Binding C}" />
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
     </DataTemplate>
 
 </ResourceDictionary>

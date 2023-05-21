@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using VectorGraphicViewer.Models;
 using VectorGraphicViewer.PrimitivesProviders;
+using System.Windows.Media;
+using System.Windows;
 
 namespace VectorGraphicViewer.ViewModels
 {

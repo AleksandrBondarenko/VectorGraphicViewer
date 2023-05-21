@@ -24,7 +24,7 @@ namespace VectorGraphicViewer
         public MainWindow(MainVM mainVM)
         {
             InitializeComponent();
-            DataContext = mainVM;
+            this.DataContext = mainVM;
         }
     }
 }
