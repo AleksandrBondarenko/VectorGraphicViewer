@@ -9,6 +9,6 @@ namespace VectorGraphicViewer.PrimitivesProviders
 {
     public interface IPrimitivesProvider
     {
-        public List<Primitive> Primitives();
+        public Task<List<Primitive>?> PrimitivesAsync();
     }
 }

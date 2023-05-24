@@ -12,22 +12,23 @@ namespace VectorGraphicViewer.PrimitivesProviders
 {
     public class JSONPrimitiveProvider : IPrimitivesProvider
     {
-        string _fileName;
-        public JSONPrimitiveProvider(string FileName) 
+        public string FileName { get; private set; }
+        public JSONPrimitiveProvider(string fileName) 
         { 
-            _fileName = FileName;
+            FileName = fileName;
         }
 
-        public List<Primitive>? Primitives()
+        async public Task<List<Primitive>?> PrimitivesAsync()
         {
             List<Primitive>? primitives;
-            using (StreamReader reader = File.OpenText(_fileName))
+            using (StreamReader reader = File.OpenText(FileName))
             {
-                var jsonString = reader.ReadToEnd();
+                var jsonString = await reader.ReadToEndAsync();
                 primitives = JsonConvert.DeserializeObject<List<Primitive>>(jsonString);
             }
-            
+
             return primitives;
         }
+
     }
 }

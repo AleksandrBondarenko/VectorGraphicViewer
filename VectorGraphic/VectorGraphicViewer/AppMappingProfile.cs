@@ -43,10 +43,10 @@ namespace VectorGraphicViewer
             return new Point(points[0], points[1]);
         }
 
-        Color StringToColorConverter(string point)
+        Color StringToColorConverter(string color)
         {
-            var points = point.Split(";").Select(x => byte.Parse(x)).ToArray();
-            return Color.FromArgb(points[0], points[1], points[2], points[3]);
+            var colorBytes = color.Split(";").Select(x => byte.Parse(x)).ToArray();
+            return Color.FromArgb(colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3]);
         }
     }
 }

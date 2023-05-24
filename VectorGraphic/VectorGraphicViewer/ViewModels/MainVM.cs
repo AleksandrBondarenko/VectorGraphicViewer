@@ -19,15 +19,21 @@ namespace VectorGraphicViewer.ViewModels
         IPrimitivesProvider _primitivesProvider;
         IMapper _mapper;
 
-        public ObservableCollection<PrimitiveVM> Primitives { get; set; }
+        public ObservableCollection<PrimitiveVM> Primitives { get; set; } = new ObservableCollection<PrimitiveVM>();
+        public Task Initialization { get; private set; }
 
         public MainVM(IPrimitivesProvider primitivesProvider, IMapper mapper)
         {
             _mapper = mapper;
             _primitivesProvider = primitivesProvider;
-            Primitives = new ObservableCollection<PrimitiveVM>(
-                _primitivesProvider.Primitives()
-                .Select(x => (PrimitiveVM)_mapper.Map(x, x.GetType(), typeof(PrimitiveVM))));
+            Initialization = InitializeAsync();
+        }
+
+        private async Task InitializeAsync()
+        {
+            var primitives = await _primitivesProvider.PrimitivesAsync();
+            foreach (var primitive in primitives)
+                Primitives.Add(_mapper.Map<PrimitiveVM>(primitive));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
