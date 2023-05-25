@@ -20,7 +20,11 @@
         <ItemsControl ItemsSource="{Binding Primitives}" Width="0" Height="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas/>
+                    <Canvas>
+                        <Canvas.LayoutTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="-1" CenterX="0.0" CenterY="0.0" />
+                        </Canvas.LayoutTransform>
+                    </Canvas>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

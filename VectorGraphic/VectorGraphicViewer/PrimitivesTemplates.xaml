@@ -5,14 +5,14 @@
 
 
     <DataTemplate DataType="{x:Type local:LineVM}">
-        <Line
-         X1="{Binding A.X}" Y1="{Binding A.Y}"
-         X2="{Binding B.X}" Y2="{Binding B.Y}"
-         StrokeThickness="1">
-            <Line.Stroke>
+        <Path StrokeThickness="1">
+            <Path.Stroke>
                 <SolidColorBrush Color="{Binding Color}"/>
-            </Line.Stroke>
-        </Line>
+            </Path.Stroke>
+            <Path.Data>
+                <LineGeometry StartPoint="{Binding A}" EndPoint="{Binding B}"/>
+            </Path.Data>
+        </Path>
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type local:CircleVM}">
@@ -35,7 +35,7 @@
                 </Style>
             </Path.Style>
             <Path.Data>
-                <EllipseGeometry RadiusX="{Binding Radius}" RadiusY="{Binding Radius}" Center="{Binding CenterPoint}" />
+                <EllipseGeometry RadiusX="{Binding Radius}" RadiusY="{Binding Radius}" Center="{Binding Center}" />
             </Path.Data>
         </Path>
     </DataTemplate>
