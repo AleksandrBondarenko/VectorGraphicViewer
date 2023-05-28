@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VectorGraphicViewer.ViewModels;
 using VectorGraphicViewer.Models;
 using System.Windows.Media;
 using System.Windows;
+using System.Globalization;
 
 namespace VectorGraphicViewer
 {
@@ -39,7 +36,7 @@ namespace VectorGraphicViewer
 
         Point StringToPointConverter(string point)
         {
-            var points = point.Split(";").Select(x => double.Parse(x)).ToArray();
+            var points = point.Split(";").Select(x => double.Parse(x, new NumberFormatInfo { NumberDecimalSeparator = ","})).ToArray();
             return new Point(points[0], points[1]);
         }
 

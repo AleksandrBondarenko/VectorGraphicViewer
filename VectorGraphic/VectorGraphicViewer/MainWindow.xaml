@@ -7,26 +7,56 @@
         xmlns:viewmodels="clr-namespace:VectorGraphicViewer.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MainVM}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="500" Width="500">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="PrimitivesTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
+            <local:MultiplyValueConverter x:Key="MultiplyValueConverter"/>
         </ResourceDictionary>
     </Window.Resources>
-
-    <Viewbox Stretch="None">
-        <ItemsControl ItemsSource="{Binding Primitives}" Width="0" Height="0">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas>
-                        <Canvas.LayoutTransform>
-                            <ScaleTransform ScaleX="1" ScaleY="-1" CenterX="0.0" CenterY="0.0" />
-                        </Canvas.LayoutTransform>
-                    </Canvas>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+    
+    <Viewbox>
+        <Grid>
+            <ItemsControl ItemsSource="{Binding Primitives}"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Canvas.LayoutTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="-1"/>
+                            </Canvas.LayoutTransform>
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <TransformGroup>
+                                    <ScaleTransform>
+                                        <ScaleTransform.ScaleX>
+                                            <Binding ElementName="sldZoom" Path="Value" Mode="OneWay"/>
+                                        </ScaleTransform.ScaleX>
+                                        <ScaleTransform.ScaleY>
+                                            <Binding ElementName="sldZoom" Path="Value" Mode="OneWay"/>
+                                        </ScaleTransform.ScaleY>
+                                    </ScaleTransform>
+                                    <TranslateTransform 
+                                        X="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Canvas}, Converter={StaticResource MultiplyValueConverter}, ConverterParameter=0.5}"
+                                        Y="{Binding Height, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Canvas}, Converter={StaticResource MultiplyValueConverter}, ConverterParameter=0.5}"/>
+                                </TransformGroup>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+            <Slider x:Name="sldZoom" Orientation="Horizontal" Minimum="0" Maximum="1" Value="0.5"/>
+        </Grid>
     </Viewbox>
 </Window>
